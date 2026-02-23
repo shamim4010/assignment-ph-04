@@ -1,6 +1,8 @@
 let jobInfoInterview = [];
 let jobInfoReject = [];
 
+const filterSection = document.getElementById('filter-section');
+
 const btnAll = document.getElementById('btn-all');
 const btnInterview = document.getElementById('btn-interview');
 const btnReject = document.getElementById('btn-reject');
@@ -85,7 +87,9 @@ document.querySelector('main').addEventListener('click', function(event){
         jobCountAv()
 
         document.getElementById('re-div').classList.add('hide');
-        jobCountIn.innerText = jobInfoInterview.length + ' of ' + allJob.children.length;
+        secInterviewJob.appendChild(filterSection);
+        filterSection.classList.remove('hide');
+        jobCountIn.innerText = filterSection.children.length + ' of ' + allJob.children.length;
     }
     else if (event.target.classList.contains('btn-re')){
         const parenNode = event.target.parentNode.parentNode;
@@ -118,7 +122,9 @@ document.querySelector('main').addEventListener('click', function(event){
         renderjobInfoReject()
 
         document.getElementById('re-div-re').classList.add('hide');
-        jobCountRe.innerText = jobInfoReject.length + ' of ' + allJob.children.length;
+        rejectedJob.appendChild(filterSection);
+        filterSection.classList.remove('hide');
+        jobCountRe.innerText = filterSection.children.length + ' of ' + allJob.children.length;
     }
 })
 
@@ -126,7 +132,7 @@ function renderJobInfoInterview(){
     for (infoCollet of jobInfoInterview){
         
         let isDobule = false;
-        const allCompanyName = secInterviewJob.querySelectorAll('.job-info h5');
+        const allCompanyName = filterSection.querySelectorAll('.job-info h5');
         for (let allH5 of allCompanyName){
             if (allH5.innerText === infoCollet.companyName){
                 isDobule = true;
@@ -157,7 +163,7 @@ function renderJobInfoInterview(){
             </div>
         `
 
-        secInterviewJob.appendChild(div);
+        filterSection.appendChild(div);
     }
 }
 
@@ -165,7 +171,7 @@ function renderjobInfoReject(){
     for (infoCollet of jobInfoReject){
 
         let isDobule = false;
-        const allCompanyName = rejectedJob.querySelectorAll('.job-info h5');
+        const allCompanyName = filterSection.querySelectorAll('.job-info h5');
         for (let allH5 of allCompanyName){
             if (allH5.innerText === infoCollet.companyName){
                 isDobule = true;
@@ -196,9 +202,11 @@ function renderjobInfoReject(){
             </div>
         `
         
-        rejectedJob.appendChild(div)
+        filterSection.appendChild(div)
     }
 }
+
+
 
 /* toggling option Create */
 /* function showHide(id) {
