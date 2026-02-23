@@ -90,6 +90,7 @@ document.querySelector('main').addEventListener('click', function(event){
         secInterviewJob.appendChild(filterSection);
         filterSection.classList.remove('hide');
         jobCountIn.innerText = filterSection.children.length + ' of ' + allJob.children.length;
+        
     }
     else if (event.target.classList.contains('btn-re')){
         const parenNode = event.target.parentNode.parentNode;
@@ -125,6 +126,7 @@ document.querySelector('main').addEventListener('click', function(event){
         rejectedJob.appendChild(filterSection);
         filterSection.classList.remove('hide');
         jobCountRe.innerText = filterSection.children.length + ' of ' + allJob.children.length;
+        
     }
 })
 
@@ -206,7 +208,7 @@ function renderjobInfoReject(){
     }
 }
 
-
+/* 
 
 /* toggling option Create */
 /* function showHide(id) {
