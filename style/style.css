@@ -180,9 +180,13 @@ p {
     border-left: 2px solid #EF4444;
 }
 
-.applied {
+.applied-in {
     border: 1px solid #10B981;
     color: #10B981;
+}
+.applied-re {
+    border: 1px solid #EF4444;
+    color: #EF4444;
 }
 
 .hide {

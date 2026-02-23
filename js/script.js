@@ -11,7 +11,7 @@ const rejectedJob = document.getElementById('rejected-job');
 
 const jobCountAll  = document.getElementById('job-count-all');
 const jobCountIn = document.getElementById('job-count-in');
-const jobCountRe = document.getElementById('job-count-re');
+const jobCountRe = document.getElementById('job-count-re'); 
 
 function showHide(id) {
     btnAll.classList.remove('btn-1');
@@ -62,6 +62,9 @@ document.querySelector('main').addEventListener('click', function(event){
         const viewNa = parenNode.querySelector('.na').innerText = 'APPLIED';
         const discription = parenNode.querySelector('.p3').innerText;
 
+        parenNode.parentNode.classList.add('cng-card-in');
+        parenNode.querySelector('.na').classList.add('applied-in');
+
         const jobInfo = {
             companyName,
             position,
@@ -74,48 +77,75 @@ document.querySelector('main').addEventListener('click', function(event){
         if (!itemFind){
             jobInfoInterview.push(jobInfo);
         }
-        jobCountAv()
-        renderJobInfoInterview()
+        
+        jobInfoReject = jobInfoReject.filter(cpname => cpname.companyName != jobInfo.companyName);
 
+
+        renderJobInfoInterview()
+        jobCountAv()
+
+        document.getElementById('re-div').classList.add('hide');
+        jobCountIn.innerText = jobInfoInterview.length + ' of ' + allJob.children.length;
     }
     else if (event.target.classList.contains('btn-re')){
         const parenNode = event.target.parentNode.parentNode;
-        
+
         const companyName = parenNode.querySelector('h5').innerText;
         const position = parenNode.querySelector('.p1').innerText;
         const LocationTypeSalary = parenNode.querySelector('.p2').innerText;
         const viewNa = parenNode.querySelector('.na').innerText = 'REJECTED';
         const discription = parenNode.querySelector('.p3').innerText;
 
+        parenNode.parentNode.classList.add('cng-card-re');
+        parenNode.querySelector('.na').classList.add('applied-re');
+
         const jobInfo = {
             companyName,
             position,
             LocationTypeSalary,
             viewNa,
-            discription
+            discription 
         }
         
         const itemFind = jobInfoReject.find(cpname => cpname.companyName == jobInfo.companyName);
         if (!itemFind){
             jobInfoReject.push(jobInfo);
         }
-        jobCountAv()
 
-        
+        jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != jobInfo.companyName)
+
+        jobCountAv()
         renderjobInfoReject()
+
+        document.getElementById('re-div-re').classList.add('hide');
+        jobCountRe.innerText = jobInfoReject.length + ' of ' + allJob.children.length;
     }
 })
 
 function renderJobInfoInterview(){
     for (infoCollet of jobInfoInterview){
+        
+        let isDobule = false;
+        const allCompanyName = secInterviewJob.querySelectorAll('.job-info h5');
+        for (let allH5 of allCompanyName){
+            if (allH5.innerText === infoCollet.companyName){
+                isDobule = true;
+                break
+            }
+        }
+        
+        if (isDobule) {
+            continue;
+        }
+
         let div = document.createElement('div');
-        div.className = 'job-card';
+        div.className = 'job-card cng-card-in';
         div.innerHTML = `
             <div class="job-info">
                 <h5>${infoCollet.companyName}</h5>
                 <p class="p1">${infoCollet.position}</p>
                 <p class="p2">${infoCollet.LocationTypeSalary}</p>
-                <span class="na">${infoCollet.viewNa}</span>
+                <span class="na applied-in">${infoCollet.viewNa}</span>
                 <p class="p3">${infoCollet.discription}</p>
                 <div class="btn">
                     <button class="btn-in">INTERVIEW</button>
@@ -126,20 +156,35 @@ function renderJobInfoInterview(){
                 <button><i class="fa-solid fa-trash-can"></i></button>
             </div>
         `
-        secInterviewJob.appendChild(div)
+
+        secInterviewJob.appendChild(div);
     }
 }
 
 function renderjobInfoReject(){
     for (infoCollet of jobInfoReject){
+
+        let isDobule = false;
+        const allCompanyName = rejectedJob.querySelectorAll('.job-info h5');
+        for (let allH5 of allCompanyName){
+            if (allH5.innerText === infoCollet.companyName){
+                isDobule = true;
+                break
+            }
+        }
+        
+        if (isDobule) {
+            continue;
+        }
+
         let div = document.createElement('div');
-        div.className = 'job-card';
+        div.className = 'job-card cng-card-re';
         div.innerHTML = `
             <div class="job-info">
                 <h5>${infoCollet.companyName}</h5>
                 <p class="p1">${infoCollet.position}</p>
                 <p class="p2">${infoCollet.LocationTypeSalary}</p>
-                <span class="na">${infoCollet.viewNa}</span>
+                <span class="na applied-re">${infoCollet.viewNa}</span>
                 <p class="p3">${infoCollet.discription}</p>
                 <div class="btn">
                     <button class="btn-in">INTERVIEW</button>
@@ -150,6 +195,7 @@ function renderjobInfoReject(){
                 <button><i class="fa-solid fa-trash-can"></i></button>
             </div>
         `
+        
         rejectedJob.appendChild(div)
     }
 }
