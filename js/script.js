@@ -55,6 +55,8 @@ function jobCountAv(){
 jobCountAv()
 
 
+
+
 document.querySelector('main').addEventListener('click', function(event){
     if (event.target.classList.contains('btn-in')){
         const parenNode = event.target.parentNode.parentNode;
@@ -72,7 +74,7 @@ document.querySelector('main').addEventListener('click', function(event){
             const childen = filterSectionRe.querySelectorAll('.job-info h5')
             for (let ch of childen){
                 if (ch.innerText == companyName){
-                    ch.parentElement.parentElement.remove();
+                    ch.parentElement.parentElement.remove(); 
                 }
             }
         }
@@ -100,6 +102,7 @@ document.querySelector('main').addEventListener('click', function(event){
         document.getElementById('re-div').classList.add('hide');
         secInterviewJob.appendChild(filterSectionIn);
         filterSectionIn.classList.remove('hide');
+        filterSectionRe.classList.add('hide');
         jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children.length;
         
     }
@@ -145,8 +148,12 @@ document.querySelector('main').addEventListener('click', function(event){
         document.getElementById('re-div-re').classList.add('hide');
         rejectedJob.appendChild(filterSectionRe);
         filterSectionRe.classList.remove('hide');
+        filterSectionIn.classList.add('hide');
         jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
-
+    }
+    else if (event.target.className.contains("delete")){
+        const parenNode = event.target.parentNode.parentNode;
+        
     }
 })
 
@@ -227,6 +234,7 @@ function renderjobInfoReject(){
         filterSectionRe.appendChild(div);
     }
 }
+
 
 /* নিচের code প্রথম এ লিখেছি পরে দেখি হয় না। 
 কিন্তু পরবর্তীতে Facebook group থেকে জানতে পারি
