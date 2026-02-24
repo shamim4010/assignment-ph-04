@@ -51,6 +51,8 @@ function jobCountAv(){
     jobCountAll.innerText = allJob.children.length;
     document.getElementById('interview').innerText = jobInfoInterview.length;
     document.getElementById('rejected').innerText = jobInfoReject.length;
+    jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children.length;
+    jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
 }
 jobCountAv()
 
@@ -96,16 +98,12 @@ document.querySelector('main').addEventListener('click', function(event){
         jobInfoReject = jobInfoReject.filter(cpname => cpname.companyName != jobInfo.companyName);
 
         renderJobInfoInterview()
-        jobCountAv()
-
-        
 
         document.getElementById('re-div').classList.add('hide');
         secInterviewJob.appendChild(filterSectionIn);
         filterSectionIn.classList.remove('hide');
         filterSectionRe.classList.add('hide');
-        jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children.length;
-        
+        jobCountAv()
     }
     else if (event.target.classList.contains('btn-re')){
         const parenNode = event.target.parentNode.parentNode;
@@ -141,22 +139,39 @@ document.querySelector('main').addEventListener('click', function(event){
             jobInfoReject.push(jobInfo);
         }
 
-        jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != jobInfo.companyName)
+        jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != jobInfo.companyName);
 
-        jobCountAv()
+        
         renderjobInfoReject()
 
         document.getElementById('re-div-re').classList.add('hide');
         rejectedJob.appendChild(filterSectionRe);
         filterSectionRe.classList.remove('hide');
         filterSectionIn.classList.add('hide');
-        jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
+        jobCountAv()
     }
     else if (event.target.classList.contains('delete')){
         const parenNode = event.target.parentNode.parentNode;
         parenNode.remove();
-        filterSectionIn.remove()
-        filterSectionRe.remove()
+
+        const companyName = parenNode.querySelector('h5').innerText;
+        const companyNameIn = filterSectionIn.querySelectorAll('.job-info h5');
+        const companyNameRe = filterSectionRe.querySelectorAll('.job-info h5');
+
+        for (cpText of companyNameIn){
+            if (cpText.innerText === companyName){
+                cpText.parentElement.parentElement.remove();
+            }
+        }
+        for (cpText2 of companyNameRe){
+            if (cpText2.innerText === companyName){
+                cpText2.parentElement.parentElement.remove();
+            }
+        }
+
+        jobInfoReject = jobInfoReject.filter(cpname => cpname.companyName != companyName);
+        jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != companyName);
+        
         jobCountAv()
     }
 })
@@ -204,9 +219,9 @@ function renderjobInfoReject(){
     for (infoCollet of jobInfoReject){
 
         let isDobule = false; 
-        const allCompanyName = filterSectionRe.querySelectorAll('.job-info h5');
-        for (let allH5 of allCompanyName){
-            if (allH5.innerText === infoCollet.companyName){
+        const allCompanyName2 = filterSectionRe.querySelectorAll('.job-info h5');
+        for (let allH52 of allCompanyName){
+            if (allH52.innerText === infoCollet.companyName){
                 isDobule = true;
                 break
             }
