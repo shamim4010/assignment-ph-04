@@ -189,6 +189,10 @@ p {
     color: #EF4444;
 }
 
+.fa-solid {
+    pointer-events: none;
+}
+
 .hide {
     display: none;
 }

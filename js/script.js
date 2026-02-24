@@ -54,9 +54,6 @@ function jobCountAv(){
 }
 jobCountAv()
 
-
-
-
 document.querySelector('main').addEventListener('click', function(event){
     if (event.target.classList.contains('btn-in')){
         const parenNode = event.target.parentNode.parentNode;
@@ -77,6 +74,10 @@ document.querySelector('main').addEventListener('click', function(event){
                     ch.parentElement.parentElement.remove(); 
                 }
             }
+        }
+
+        if (parenNode.parentNode.parentNode === filterSectionRe){
+            viewNa = allJob.children.querySelectorAll('.na').innerText = 'APPL';
         }
         
         const jobInfo = {
@@ -151,9 +152,12 @@ document.querySelector('main').addEventListener('click', function(event){
         filterSectionIn.classList.add('hide');
         jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
     }
-    else if (event.target.className.contains("delete")){
+    else if (event.target.classList.contains('delete')){
         const parenNode = event.target.parentNode.parentNode;
-        
+        parenNode.remove();
+        filterSectionIn.remove()
+        filterSectionRe.remove()
+        jobCountAv()
     }
 })
 
@@ -234,7 +238,6 @@ function renderjobInfoReject(){
         filterSectionRe.appendChild(div);
     }
 }
-
 
 /* নিচের code প্রথম এ লিখেছি পরে দেখি হয় না। 
 কিন্তু পরবর্তীতে Facebook group থেকে জানতে পারি
