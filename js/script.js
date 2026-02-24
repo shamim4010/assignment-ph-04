@@ -1,7 +1,8 @@
 let jobInfoInterview = [];
 let jobInfoReject = [];
 
-const filterSection = document.getElementById('filter-section');
+const filterSectionIn = document.getElementById('filter-section-in');
+const filterSectionRe = document.getElementById('filter-section-re');
 
 const btnAll = document.getElementById('btn-all');
 const btnInterview = document.getElementById('btn-interview');
@@ -82,14 +83,14 @@ document.querySelector('main').addEventListener('click', function(event){
         
         jobInfoReject = jobInfoReject.filter(cpname => cpname.companyName != jobInfo.companyName);
 
-
         renderJobInfoInterview()
         jobCountAv()
 
+    
         document.getElementById('re-div').classList.add('hide');
-        secInterviewJob.appendChild(filterSection);
-        filterSection.classList.remove('hide');
-        jobCountIn.innerText = filterSection.children.length + ' of ' + allJob.children.length;
+        secInterviewJob.appendChild(filterSectionIn);
+        filterSectionIn.classList.remove('hide');
+        jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children.length;
         
     }
     else if (event.target.classList.contains('btn-re')){
@@ -122,10 +123,11 @@ document.querySelector('main').addEventListener('click', function(event){
         jobCountAv()
         renderjobInfoReject()
 
+
         document.getElementById('re-div-re').classList.add('hide');
-        rejectedJob.appendChild(filterSection);
-        filterSection.classList.remove('hide');
-        jobCountRe.innerText = filterSection.children.length + ' of ' + allJob.children.length;
+        rejectedJob.appendChild(filterSectionRe);
+        filterSectionRe.classList.remove('hide');
+        jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
         
     }
 })
@@ -134,7 +136,7 @@ function renderJobInfoInterview(){
     for (infoCollet of jobInfoInterview){
         
         let isDobule = false;
-        const allCompanyName = filterSection.querySelectorAll('.job-info h5');
+        const allCompanyName = filterSectionIn.querySelectorAll('.job-info h5');
         for (let allH5 of allCompanyName){
             if (allH5.innerText === infoCollet.companyName){
                 isDobule = true;
@@ -165,15 +167,15 @@ function renderJobInfoInterview(){
             </div>
         `
 
-        filterSection.appendChild(div);
+        filterSectionIn.appendChild(div);
     }
 }
 
 function renderjobInfoReject(){
     for (infoCollet of jobInfoReject){
 
-        let isDobule = false;
-        const allCompanyName = filterSection.querySelectorAll('.job-info h5');
+        let isDobule = false; 
+        const allCompanyName = filterSectionRe.querySelectorAll('.job-info h5');
         for (let allH5 of allCompanyName){
             if (allH5.innerText === infoCollet.companyName){
                 isDobule = true;
@@ -204,12 +206,17 @@ function renderjobInfoReject(){
             </div>
         `
         
-        filterSection.appendChild(div)
+        filterSectionRe.appendChild(div);
     }
 }
 
-/* 
-
+/* নিচের code প্রথম এ লিখেছি পরে দেখি হয় না। 
+কিন্তু পরবর্তীতে Facebook group থেকে জানতে পারি
+ last conceptual video ছিল এই assignment এর উপর ।
+পরবর্তীতে conceptual video থেকে GitHub resources দেখে
+উপরের কোড করতে পারছি তাও
+ মিলাতে পারি নি */
+  
 /* toggling option Create */
 /* function showHide(id) {
     const btnOne = document.getElementById('btn-1');
