@@ -68,6 +68,15 @@ document.querySelector('main').addEventListener('click', function(event){
         parenNode.parentNode.classList.add('cng-card-in');
         parenNode.querySelector('.na').classList.add('applied-in');
 
+        if (parenNode.parentNode.parentNode === filterSectionRe){
+            const childen = filterSectionRe.querySelectorAll('.job-info h5')
+            for (let ch of childen){
+                if (ch.innerText == companyName){
+                    ch.parentElement.parentElement.remove();
+                }
+            }
+        }
+        
         const jobInfo = {
             companyName,
             position,
@@ -86,7 +95,8 @@ document.querySelector('main').addEventListener('click', function(event){
         renderJobInfoInterview()
         jobCountAv()
 
-    
+        
+
         document.getElementById('re-div').classList.add('hide');
         secInterviewJob.appendChild(filterSectionIn);
         filterSectionIn.classList.remove('hide');
@@ -104,6 +114,15 @@ document.querySelector('main').addEventListener('click', function(event){
 
         parenNode.parentNode.classList.add('cng-card-re');
         parenNode.querySelector('.na').classList.add('applied-re');
+
+        if (parenNode.parentNode.parentNode === filterSectionIn){
+            const childen = filterSectionIn.querySelectorAll('.job-info h5')
+            for (let ch of childen){
+                if (ch.innerText == companyName){
+                    ch.parentElement.parentElement.remove();
+                }
+            }
+        }
 
         const jobInfo = {
             companyName,
@@ -123,12 +142,11 @@ document.querySelector('main').addEventListener('click', function(event){
         jobCountAv()
         renderjobInfoReject()
 
-
         document.getElementById('re-div-re').classList.add('hide');
         rejectedJob.appendChild(filterSectionRe);
         filterSectionRe.classList.remove('hide');
         jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
-        
+
     }
 })
 
