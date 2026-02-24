@@ -78,8 +78,12 @@ document.querySelector('main').addEventListener('click', function(event){
             }
         }
 
-        if (parenNode.parentNode.parentNode === filterSectionRe){
-            viewNa = allJob.children.querySelectorAll('.na').innerText = 'APPL';
+        const companyNameRe = filterSectionRe.querySelectorAll('.job-info h5');
+
+        for (cpText4 of companyNameRe){
+            if (cpText4.innerText === companyName){
+                cpText4.parentElement.parentElement.remove();
+            }
         }
         
         const jobInfo = {
@@ -102,7 +106,6 @@ document.querySelector('main').addEventListener('click', function(event){
         document.getElementById('re-div').classList.add('hide');
         secInterviewJob.appendChild(filterSectionIn);
         filterSectionIn.classList.remove('hide');
-        filterSectionRe.classList.add('hide');
         jobCountAv()
     }
     else if (event.target.classList.contains('btn-re')){
@@ -126,6 +129,14 @@ document.querySelector('main').addEventListener('click', function(event){
             }
         }
 
+        const companyNameIn = filterSectionIn.querySelectorAll('.job-info h5');
+
+        for (cpText3 of companyNameIn){
+            if (cpText3.innerText === companyName){
+                cpText3.parentElement.parentElement.remove();
+            }
+        }
+
         const jobInfo = {
             companyName,
             position,
@@ -133,6 +144,8 @@ document.querySelector('main').addEventListener('click', function(event){
             viewNa,
             discription 
         }
+
+        
         
         const itemFind = jobInfoReject.find(cpname => cpname.companyName == jobInfo.companyName);
         if (!itemFind){
@@ -140,14 +153,12 @@ document.querySelector('main').addEventListener('click', function(event){
         }
 
         jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != jobInfo.companyName);
-
         
         renderjobInfoReject()
 
         document.getElementById('re-div-re').classList.add('hide');
         rejectedJob.appendChild(filterSectionRe);
         filterSectionRe.classList.remove('hide');
-        filterSectionIn.classList.add('hide');
         jobCountAv()
     }
     else if (event.target.classList.contains('delete')){
@@ -220,7 +231,7 @@ function renderjobInfoReject(){
 
         let isDobule = false; 
         const allCompanyName2 = filterSectionRe.querySelectorAll('.job-info h5');
-        for (let allH52 of allCompanyName){
+        for (let allH52 of allCompanyName2){
             if (allH52.innerText === infoCollet.companyName){
                 isDobule = true;
                 break
