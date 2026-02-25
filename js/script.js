@@ -46,6 +46,18 @@ function showHide(id) {
     }
 }
 
+function showHideReDiv(){
+    if (document.getElementById('interview').innerText === '0'){
+        document.getElementById('re-div').classList.remove('hide');
+    }
+
+    if (document.getElementById('rejected').innerText === '0'){
+        document.getElementById('re-div-re').classList.remove('hide');
+    }
+}
+
+showHideReDiv()
+
 function jobCountAv(){
     document.getElementById('total').innerText = allJob.children.length;
     jobCountAll.innerText = allJob.children.length;
@@ -82,7 +94,7 @@ document.querySelector('main').addEventListener('click', function(event){
 
         for (cpText4 of companyNameRe){
             if (cpText4.innerText === companyName){
-                cpText4.parentElement.parentElement.remove();
+                cpText4 .parentElement.parentElement.remove();
             }
         }
         
@@ -101,12 +113,14 @@ document.querySelector('main').addEventListener('click', function(event){
         
         jobInfoReject = jobInfoReject.filter(cpname => cpname.companyName != jobInfo.companyName);
 
-        renderJobInfoInterview()
+        renderJobInfoInterview();
 
-        document.getElementById('re-div').classList.add('hide');
         secInterviewJob.appendChild(filterSectionIn);
         filterSectionIn.classList.remove('hide');
-        jobCountAv()
+        jobCountAv();
+        showHideReDiv();
+        document.getElementById('re-div').classList.add('hide');
+        
     }
     else if (event.target.classList.contains('btn-re')){
         const parenNode = event.target.parentNode.parentNode;
@@ -154,12 +168,13 @@ document.querySelector('main').addEventListener('click', function(event){
 
         jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != jobInfo.companyName);
         
-        renderjobInfoReject()
+        renderjobInfoReject();
 
-        document.getElementById('re-div-re').classList.add('hide');
         rejectedJob.appendChild(filterSectionRe);
         filterSectionRe.classList.remove('hide');
-        jobCountAv()
+        jobCountAv();
+        showHideReDiv();
+        document.getElementById('re-div-re').classList.add('hide');
     }
     else if (event.target.classList.contains('delete')){
         const parenNode = event.target.parentNode.parentNode;
@@ -184,6 +199,8 @@ document.querySelector('main').addEventListener('click', function(event){
         jobInfoInterview = jobInfoInterview.filter(cpname => cpname.companyName != companyName);
         
         jobCountAv()
+        document.getElementById('re-div-re').classList.add('hide');
+        showHideReDiv();
     }
 })
 
