@@ -78,14 +78,28 @@ document.querySelector('main').addEventListener('click', function(event){
         const viewNa = parenNode.querySelector('.na').innerText = 'APPLIED';
         const discription = parenNode.querySelector('.p3').innerText;
 
+        parenNode.parentNode.classList.remove('cng-card-re');
+        parenNode.querySelector('.na').classList.remove('applied-re');
         parenNode.parentNode.classList.add('cng-card-in');
         parenNode.querySelector('.na').classList.add('applied-in');
 
         if (parenNode.parentNode.parentNode === filterSectionRe){
-            const childen = filterSectionRe.querySelectorAll('.job-info h5')
+            const allJobChilden = allJob.querySelectorAll('.job-info h5');
+            const childen = filterSectionRe.querySelectorAll('.job-info h5');
+
             for (let ch of childen){
                 if (ch.innerText == companyName){
                     ch.parentElement.parentElement.remove(); 
+                }
+            }
+
+            for (let allJobCh of allJobChilden){
+                if (allJobCh.innerText == companyName){
+                    allJobCh.parentElement.querySelector('.na').innerText = 'APPLIED';
+                    allJobCh.parentElement.parentElement.classList.remove('cng-card-re')
+                    allJobCh.parentElement.parentElement.classList.add('cng-card-in')
+                    allJobCh.parentElement.querySelector('.na').classList.remove('applied-re')
+                    allJobCh.parentElement.querySelector('.na').classList.add('applied-in')
                 }
             }
         }
@@ -135,10 +149,21 @@ document.querySelector('main').addEventListener('click', function(event){
         parenNode.querySelector('.na').classList.add('applied-re');
 
         if (parenNode.parentNode.parentNode === filterSectionIn){
+            const allJobChilden2 = allJob.querySelectorAll('.job-info h5');
             const childen = filterSectionIn.querySelectorAll('.job-info h5')
             for (let ch of childen){
                 if (ch.innerText == companyName){
                     ch.parentElement.parentElement.remove();
+                }
+            }
+
+            for (let allJobCh2 of allJobChilden2){
+                if (allJobCh2.innerText == companyName){
+                    allJobCh2.parentElement.querySelector('.na').innerText = 'REJECTED';
+                    allJobCh2.parentElement.parentElement.classList.remove('cng-card-in')
+                    allJobCh2.parentElement.parentElement.classList.add('cng-card-re')
+                    allJobCh2.parentElement.querySelector('.na').classList.remove('applied-in')
+                    allJobCh2.parentElement.querySelector('.na').classList.add('applied-re')
                 }
             }
         }

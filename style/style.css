@@ -174,10 +174,12 @@ p {
 /* js setting style */
 
 .cng-card-in {
-    border-left: 2px solid #10B981;
+    border:1px solid #10B981;
+    border-left: 3px solid #10B981;
 }
 .cng-card-re {
-    border-left: 2px solid #EF4444;
+    border:1px solid #EF4444;
+    border-left: 3px solid #EF4444;
 }
 
 .applied-in {
