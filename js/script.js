@@ -54,17 +54,24 @@ function showHideReDiv(){
     if (document.getElementById('rejected').innerText === '0'){
         document.getElementById('re-div-re').classList.remove('hide');
     }
+    
+}
+
+function showHideReDivAll(){
+    if (document.getElementById('total').innerText === '0'){
+        document.getElementById('all-re-div').classList.remove('hide');
+    }
 }
 
 showHideReDiv()
 
 function jobCountAv(){
-    document.getElementById('total').innerText = allJob.children.length;
-    jobCountAll.innerText = allJob.children.length;
+    document.getElementById('total').innerText = allJob.children[0].children.length;
+    jobCountAll.innerText = allJob.children[0].children.length;
     document.getElementById('interview').innerText = jobInfoInterview.length;
     document.getElementById('rejected').innerText = jobInfoReject.length;
-    jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children.length;
-    jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children.length;
+    jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children[0].children.length;
+    jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children[0].children.length;
 }
 jobCountAv()
 
@@ -134,7 +141,6 @@ document.querySelector('main').addEventListener('click', function(event){
         jobCountAv();
         showHideReDiv();
         document.getElementById('re-div').classList.add('hide');
-        
     }
     else if (event.target.classList.contains('btn-re')){
         const parenNode = event.target.parentNode.parentNode;
@@ -226,6 +232,7 @@ document.querySelector('main').addEventListener('click', function(event){
         jobCountAv()
         document.getElementById('re-div-re').classList.add('hide');
         showHideReDiv();
+        showHideReDivAll()
     }
 })
 
