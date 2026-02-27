@@ -171,6 +171,10 @@ p {
     gap: 4px;
 }
 
+.delete {
+    border: none;
+}
+
 /* js setting style */
 
 .cng-card-in {

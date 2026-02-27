@@ -70,8 +70,18 @@ function jobCountAv(){
     jobCountAll.innerText = allJob.children[0].children.length;
     document.getElementById('interview').innerText = jobInfoInterview.length;
     document.getElementById('rejected').innerText = jobInfoReject.length;
-    jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children[0].children.length;
-    jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children[0].children.length;
+    if (filterSectionIn.children.length > 0){
+        jobCountIn.innerText = filterSectionIn.children.length + ' of ' + allJob.children[0].children.length;
+    }
+    else (
+        jobCountIn.innerText = '0'
+    )
+    if (filterSectionRe.childNodes.length > 0){
+        jobCountRe.innerText = filterSectionRe.children.length + ' of ' + allJob.children[0].children.length;
+    }
+    else {
+        jobCountRe.innerText = '0'
+    }
 }
 jobCountAv()
 
@@ -267,7 +277,7 @@ function renderJobInfoInterview(){
                 </div>
             </div>
             <div>
-                <button><i class="fa-solid fa-trash-can"></i></button>
+                <button class="hide"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         `
 
@@ -306,7 +316,7 @@ function renderjobInfoReject(){
                 </div>
             </div>
             <div>
-                <button><i class="fa-solid fa-trash-can"></i></button>
+                <button class="hide"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         `
         
